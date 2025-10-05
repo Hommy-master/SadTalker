@@ -8,11 +8,35 @@ import scipy.io as scio
 def get_facerender_data(coeff_path, pic_path, first_coeff_path, audio_path, 
                         batch_size, input_yaw_list=None, input_pitch_list=None, input_roll_list=None, 
                         expression_scale=1.0, still_mode = False, preprocess='crop', size = 256):
+    """
+    准备面部渲染所需的数据
+    
+    Args:
+        coeff_path: 3DMM系数文件路径
+        pic_path: 源图像路径  
+        first_coeff_path: 第一帧系数文件路径
+        audio_path: 音频文件路径
+        batch_size: 批次大小
+        input_yaw_list: 输入偏航角列表
+        input_pitch_list: 输入俯仰角列表
+        input_roll_list: 输入翻滚角列表
+        expression_scale: 表情缩放因子
+        still_mode: 静止模式
+        preprocess: 预处理方式
+        size: 图像尺寸
+        
+    Returns:
+        包含渲染所需数据的字典
+    """
 
+    # 语义半径参数，用于控制面部语义特征的影响范围
     semantic_radius = 13
+    # 从系数文件路径提取视频名称
     video_name = os.path.splitext(os.path.split(coeff_path)[-1])[0]
+    # 生成文本文件路径，用于保存中间结果
     txt_path = os.path.splitext(coeff_path)[0]
 
+    # 初始化返回数据字典
     data={}
 
     img1 = Image.open(pic_path)

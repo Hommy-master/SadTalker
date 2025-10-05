@@ -26,5 +26,5 @@ pip install -r requirements.txt
 
 ## 4. 运行
 ```base
-python inference.py --driven_audio ./10s.mp3 --source_image ./1.png --result_dir ./results --still --preprocess full --enhancer gfpgan
+python inference.py --driven_audio examples/driven_audio/chinese_news.wav --source_image examples/source_image/art_6.png --result_dir ./results --still --preprocess full --enhancer gfpgan
 ```
